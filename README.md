@@ -1,11 +1,14 @@
 # Pokedexcli
-A project I did for a website called Boot.Dev. Still needs a few features. 
+A project I did for a website called Boot.Dev. Still needs a few features. Uses PokeAPI.
+I am happy with it, however, I am not happy with my STRUCT names lol. As well as a few spaghetti code.
+As I worked through the JSON of PokeAPI, I had to constantly add one more layer via a new STRUCT.
 
 Features to be added:
 ---------------------
 - Party system
 - Inspection (stats)
 - Chance to catch based on base_experience (pokeapi)
+- Create a seperate function for API calls
 
 Features I want to add:
 -----------------------
