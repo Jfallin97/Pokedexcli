@@ -5,6 +5,11 @@ Features to be added:
 ---------------------
 - Party system
 - Inspection (stats)
+- Chance to catch based on base_experience (pokeapi)
+
+Features I want to add:
+-----------------------
+- Shiny Pokemon
 
 
 
