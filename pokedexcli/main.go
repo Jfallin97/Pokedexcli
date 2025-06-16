@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"strings"
@@ -13,6 +14,12 @@ import (
 
 	"github.com/jfallin97/pokedexcli/internal"
 )
+
+// RNG
+var rng *rand.Rand
+
+// Pokedex storage map - for when they catch a pokemon
+var PokeBox = make(map[string]ActualPokemon)
 
 // Global cache var
 var cache *internal.Cache
@@ -78,6 +85,11 @@ type PokeTypes struct {
 var commandList map[string]cliCommand
 
 func init() {
+	// RNG
+	source := rand.NewSource(time.Now().UnixNano())
+	rng = rand.New(source)
+
+	// Commands
 	commandList = map[string]cliCommand{
 		"exit": {
 			name:        "exit",
@@ -329,8 +341,22 @@ func commandCatch(args []string) error {
 	if errs != nil {
 		log.Fatal(errs)
 	}
+
 	var PokeName = monster.Name
-	fmt.Printf("%s was caught!\n", PokeName)
+	var BaseExperience = monster.BaseExperience
+	var CatchChance = 100 - BaseExperience
+
+	if caughtOrNot(CatchChance) {
+		fmt.Printf("%s was caught!\n", PokeName)
+		PokeBox[PokeName] = monster
+	} else {
+		fmt.Printf("%s got away!\n", PokeName)
+	}
 
 	return nil
+}
+
+// Returns true if successful catch. We give it a chance to catch.
+func caughtOrNot(chance int) bool {
+	return rng.Intn(100) < chance
 }
