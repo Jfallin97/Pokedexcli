@@ -7,7 +7,6 @@ Features to be added:
 ---------------------
 - Party system
 - Inspection (stats)
-- Chance to catch based on base_experience (pokeapi)
 - Create a seperate function for API calls
 
 Features I want to add:
