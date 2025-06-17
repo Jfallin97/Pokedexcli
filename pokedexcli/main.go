@@ -67,7 +67,8 @@ type ActualPokemon struct {
 }
 
 type PokeStats struct {
-	Stat DeepStats `json:"stat"`
+	BaseStat int       `json:"base_stat"`
+	Stat     DeepStats `json:"stat"`
 }
 
 type DeepStats struct {
@@ -120,6 +121,11 @@ func init() {
 			name:        "catch",
 			description: "Attempt to Catch a Pokemon!",
 			callback:    commandCatch,
+		},
+		"inspect": {
+			name:        "inspect",
+			description: "View information and stats about the pokemon. (you must have caught it)",
+			callback:    commandInspect,
 		},
 	}
 }
@@ -359,4 +365,36 @@ func commandCatch(args []string) error {
 // Returns true if successful catch. We give it a chance to catch.
 func caughtOrNot(chance int) bool {
 	return rng.Intn(100) < chance
+}
+
+// func for checking a pokemons stats and information
+func commandInspect(args []string) error {
+	if len(args) == 0 {
+		fmt.Println("Please specify a Pokemon name to inspect")
+		return nil
+	}
+	var pokemonName = args[0]
+
+	pokemon, exists := PokeBox[pokemonName]
+	if !exists {
+		fmt.Printf("You haven't caught %s yet!\n", pokemonName)
+		return nil
+	}
+
+	fmt.Printf("Name: %s\n", pokemon.Name)
+	fmt.Printf("Height: %d\n", pokemon.Height)
+	fmt.Printf("Weight: %d\n", pokemon.Weight)
+	fmt.Printf("Base Experience: %d\n", pokemon.BaseExperience)
+
+	fmt.Println("Stats:")
+	for _, stat := range pokemon.Stats {
+		fmt.Printf(" - %s: %d\n", stat.Stat.Name, stat.BaseStat)
+	}
+
+	fmt.Println("Types:")
+	for _, typeInfo := range pokemon.Types {
+		fmt.Printf(" - %s\n", typeInfo.Types.Name)
+	}
+
+	return nil
 }
