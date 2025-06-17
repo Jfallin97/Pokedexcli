@@ -6,7 +6,6 @@ As I worked through the JSON of PokeAPI, I had to constantly add one more layer 
 Features to be added:
 ---------------------
 - Party system
-- Inspection (stats)
 - Create a seperate function for API calls
 
 Features I want to add:
