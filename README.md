@@ -14,4 +14,4 @@ Features I want to add:
 
 
 
-Thise project used Clause in order to help break down functions step by step. Code was not copied, however, the idea of some functions were walked through without code. 
+Thise project used Clause in order to help break down functions step by step. Code was not copied, however, the idea of some functions were walked through without code. (CORRECTION: I did use code from the assignment itself. Specifically, the testing portion.)
